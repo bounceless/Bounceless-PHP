@@ -15,3 +15,4 @@ $key = "PUT YOUR API KEY HERE";
             $url = 'https://apps.bounceless.io/api/getApiFileInfo?secret='.$key.'&id=10700';
             $string = file_get_contents($url);
             list($file_id,$filename,$unique,$lines,$lines_processed,$status,$timestamp,$link1,$link2) = explode('|',$string); //parse data
+
