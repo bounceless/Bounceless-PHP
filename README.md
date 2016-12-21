@@ -1,6 +1,6 @@
-Usage of email validation using PHP and cURL
+# Usage of email validation using PHP and cURL
 
-Api One By One
+# Api One By One
 
 PHP$email = "test@example.com";
 $key = "PUT YOUR API KEY HERE";
