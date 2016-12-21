@@ -47,12 +47,12 @@ when status of file is "finished", your software downloading reports
 Upload file with API:
 
 There is link for file upload:
-https://apps.emaillistverify.com/api/verifyApiFile?secret=PUT_YOUR_API_KEY_HERE&filename=NAME_OF_YOUR_FILE
+https://apps.bounceless.io/api/verifyApiFile?secret=PUT_YOUR_API_KEY_HERE&filename=NAME_OF_YOUR_FILE
 
 Example of PHP code:
 PHP$key = "PUT YOUR API KEY HERE";
 $settings['file_contents'] ="@/home/Downloads/emails.txt"; //path to your file
-$url = 'https://apps.emaillistverify.com/api/verifApiFile?secret='.$key.'&filename=emails.txt';
+$url = 'https://apps.bounceless.io/api/verifApiFile?secret='.$key.'&filename=emails.txt';
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -68,17 +68,17 @@ Status=" missing parameters"- There are no validations remaining to complete thi
 Get file info with API:
 
 There is link that you need to request:
-https://apps.emaillistverify.com/api/getApiFileInfo?secret=PUT_YOUR_API_KEY_HERE&id=FILE_ID_OF_ALREADY_UPLOADED_FILE
+https://apps.bounceless.io/api/getApiFileInfo?secret=PUT_YOUR_API_KEY_HERE&id=FILE_ID_OF_ALREADY_UPLOADED_FILE
 
 Example of PHP code:
 PHP$key = "PUT YOUR API KEY HERE";
-$url = 'https://apps.emaillistverify.com/api/getApiFileInfo?secret='.$key.'&id=10700';
+$url = 'https://apps.bounceless.io/api/getApiFileInfo?secret='.$key.'&id=10700';
 $string = file_get_contents($url);
 list($file_id,$filename,$unique,$lines,$lines_processed,$status,$timestamp,$link1,$link2) = explode('|',$string); //parse data
 Example of output for file that in progress : 10700|my_emails.txt|no|200|150|progress|1445878121||
 
 Example of output for file that already finished :
-10700|my_emails.txt|no|200|200|finished|1445878121|https://apps.emaillistverify.com/app/webroot/files/52/655/result_ok_10700_2015-10-26.csv|https://apps.emaillistverify.com/app/webroot/files/52/655/result_all_10700_2015-10-26.csv
+10700|my_emails.txt|no|200|200|finished|1445878121|https://apps.bounceless.io/app/webroot/files/52/655/result_ok_10700_2015-10-26.csv|https://apps.emaillistverify.com/app/webroot/files/52/655/result_all_10700_2015-10-26.csv
 
 Full errors list:
 Status=" error_file_not_exists"- FILE ID is not exists on your account.
