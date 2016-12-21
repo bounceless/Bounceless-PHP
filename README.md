@@ -4,7 +4,7 @@
 
 PHP$email = "test@example.com";
 $key = "PUT YOUR API KEY HERE";
-$url = "https://apps.emaillistverify.com/api/verifyEmail?secret=".$key."&email=".$email;
+$url = "https://apps.bounceless.io/api/verifyEmail?secret=".$key."&email=".$email;
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
