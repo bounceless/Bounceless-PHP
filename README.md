@@ -3,15 +3,25 @@
 # Api One By One
 
 $email = "test@example.com";
+
 $key = "PUT YOUR API KEY HERE";
-$url = "https://apps.emaillistverify.com/api/verifyEmail?secret=".$key."&email=".$email;
+
+$url = "https://apps.bouceless.io/api/verifyEmail?secret=".$key."&email=".$email;
+
 $ch = curl_init();
+
 curl_setopt($ch, CURLOPT_URL, $url);
+
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+
 $response = curl_exec($ch);
+
 echo $response;
+
 curl_close($ch);
 
 
@@ -24,13 +34,21 @@ Status="ok"- A ok response is an address that has passed all tests. The address 
 Status="fail"- A failed response is an address that has failed 1 or more tests.
 
 . The address provided does not exist.
+
 . The mailbox is full.
+
 . The address provided is a disposable email address.
+
 . The address provided is not in a valid format.
+
 . The address provided is a role account.
+
 . The address provided does not have a valid dns.
+
 . The address provided does not have a mx server.
+
 . The address provided was found in your internal blacklist containing previously failed addresses.
+
 . The domain provided was found in your domain blacklist.
 
 
