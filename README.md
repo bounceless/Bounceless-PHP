@@ -87,13 +87,21 @@ https://apps.bounceless.io/api/verifyApiFile?secret=PUT_YOUR_API_KEY_HERE&filena
  Example of PHP code:
  
 $key = "PUT YOUR API KEY HERE";
+
 $settings['file_contents'] ="@/home/Downloads/emails.txt"; //path to your file
+
 $url = 'https://apps.bounceless.io/api/verifApiFile?secret='.$key.'&filename=emails.txt';
+
 $ch = curl_init($url);
+
 curl_setopt($ch, CURLOPT_POST, true);
+
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
 curl_setopt($ch, CURLOPT_POSTFIELDS, $settings);
+
 $file_id = curl_exec($ch); //you need to save this FILE ID for get file status and download reports in future
+
 curl_close($ch);
 
 Example of output when success: 10700 Example of output when error happens :
