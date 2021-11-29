@@ -3,27 +3,16 @@
 # Api One By One
 
 $email = "test@example.com";
-
 $key = "PUT YOUR API KEY HERE";
-
 $url = "https://apps.bounceless.io/api/verifyEmail?secret=".$key."&email=".$email;
-
 $ch = curl_init();
-
 curl_setopt($ch, CURLOPT_URL, $url);
-
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-
 $response = curl_exec($ch);
-
 echo $response;
-
 curl_close($ch);
-
 
 
 
@@ -87,7 +76,7 @@ https://apps.bounceless.io/api/verifyApiFile?secret=PUT_YOUR_API_KEY_HERE&filena
  
  Example of PHP code:
  
-  $key = "PUT YOUR API KEY HERE";
+$key = "PUT YOUR API KEY HERE";
 $settings['file_contents'] ="@/home/Downloads/emails.txt"; //path to your file
 $url = 'https://apps.bounceless.io/api/verifApiFile?secret='.$key.'&filename=emails.txt';
 $ch = curl_init($url);
