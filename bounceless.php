@@ -1,7 +1,7 @@
 <!-- upload the file -->
 $key = "PUT YOUR API KEY HERE";
 $settings['file_contents'] ="@/home/Downloads/emails.txt"; //path to your file
-$url = 'https://apps.bounceless.io/api/verifApiFile?secret='.$key.'&filename=my_emails.txt';
+$url = 'https://apps.bounceless.io/api/verifyApiFile?secret='.$key.'&filename=my_emails.txt';
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
