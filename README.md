@@ -1,166 +1,133 @@
-# Usage of email validation using PHP and cURL
 
-# Api One By One
+# Email Verification API for PHP
 
+This repository contains the code for Bounceless.io email verification API implemented in PHP. It uses the Bounceless API to verify the validity of email addresses.
+
+## Prerequisites
+
+To use this API, you'll need the following:
+
+- PHP (version 5.5 or later)
+- cURL extension for PHP
+
+## Getting Started
+
+1. Clone this repository to your local machine or download the code as a ZIP file.
+2. Replace `"PUT YOUR API KEY HERE"` in the code with your actual Bounceless API key.
+3. Upload the code to your web server or run it locally using a PHP development environment.
+4. Make sure the cURL extension is enabled in your PHP configuration.
+5. Execute the PHP script by accessing it through a web browser or using the PHP CLI.
+
+## Usage
+
+### Single Mail Details Endpoint
+
+The `/singlemaildetails` endpoint allows you to verify the details of a single email address.
+
+To verify a single email address, follow these steps:
+
+1. Set the `$email` variable to the email address you want to verify.
+2. Replace `"PUT YOUR API KEY HERE"` in the code with your Bounceless API key.
+3. Execute the PHP script.
+4. The response from the API will be displayed, providing detailed information about the email address.
+
+### Verif API File Endpoint
+
+The `/verifApiFile` endpoint allows you to upload a file for email address verification.
+
+To upload a file for verification, follow these steps:
+
+1. Set the `$key` variable to your Bounceless API key.
+2. Set the `$settings['file_contents']` variable to the path of the file you want to upload.
+3. Execute the PHP script.
+4. The script will upload the file to the API and return a file ID.
+5. Save the file ID for future use.
+
+### Get API File Info Endpoint
+
+The `/getApiFileInfo` endpoint allows you to retrieve information about a previously uploaded file.
+
+To retrieve file information, follow these steps:
+
+1. Set the `$key` variable to your Bounceless API key.
+2. Set the `$file_id` variable to the file ID of the uploaded file you want to retrieve information about.
+3. Execute the PHP script.
+4. The script will retrieve the file information from the API and display it.
+
+## Code Explanation
+
+The code uses the cURL library to make HTTP requests to the Bounceless API. Here's a breakdown of the code for each endpoint:
+
+### Single Mail Details Endpoint
+
+```php
+<?php
 $email = "test@example.com";
-
 $key = "PUT YOUR API KEY HERE";
+$url = "https://apps.bounceless.io/api/singlemaildetails?secret=" . $key . "&email=" . $email;
 
-$url = "https://apps.bounceless.io/api/verifyEmail?secret=".$key."&email=".$email;
-
+// cURL request to the API
 $ch = curl_init();
-
-curl_setopt($ch, CURLOPT_URL, $url);
-
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-
+curl_setopt_array($ch, [
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_FOLLOWLOCATION => true,
+]);
 $response = curl_exec($ch);
-
-echo $response;
-
 curl_close($ch);
 
+// Decode and display the JSON response
+$data = json_decode($response, true);
+echo json_encode($data, JSON_PRETTY_PRINT);
+?>
+```
 
+### Verif API File Endpoint
 
-# Main Status Responses:
-
-Status="ok"- A ok response is an address that has passed all tests. The address provided passed all tests.
-
-Status="fail"- A failed response is an address that has failed 1 or more tests.
-
-. The address provided does not exist.
-
-. The mailbox is full.
-
-. The address provided is a disposable email address.
-
-. The address provided is not in a valid format.
-
-. The address provided is a role account.
-
-. The address provided does not have a valid dns.
-
-. The address provided does not have a mx server.
-
-. The address provided was found in your internal blacklist containing previously failed addresses.
-
-. The domain provided was found in your domain blacklist.
-
-
-
-Status="unknown"- A unknown response is an address that can not be accurately tested. Is a Catchall mx server config. Greylisting is active on this server, please try again in a few minutes. Greylisting is suspected to be active on this server, please try again in a few minutes. The address provided can not be verified at this time.
-
-Status="incorrect"- No email provided in request. Email syntax error (example: myaddress[at]gmail.com, must be myaddress@gmail.com)
-
-Status=" key_not_valid"- No api key provided in request or invalid.
-
-Status=" missing parameters"- There are no validations remaining to complete this attempt.
-
-
-
-
-
-# Api - Bulk emails verification
-
-When to use:
-
-This tool created for customers that want to upload emails list and download results in automatic mode. For example if you using bulk verification tool you need to: login to our service, open upload form, choose file, wait until file will be finished, download results. But this API allow to do this work for your software in fully automatic mode without login to site.
-
-
-How it works:
-1. your software uploading file with emails to our API and getting {file_id} as result
-
-2. your software checking status of file by {file_id} (once per 10 minutes for example)
-
-3. when status of file is "finished", your software downloading reports
-
-
-# Upload file with API:
-
-There is link for file upload:
-https://apps.bounceless.io/api/verifyApiFile?secret=PUT_YOUR_API_KEY_HERE&filename=NAME_OF_YOUR_FILE
- 
- Example of PHP code:
- 
+```php
+<?php
 $key = "PUT YOUR API KEY HERE";
-
-$settings['file_contents'] ="@/home/Downloads/emails.txt"; //path to your file
-
-$url = 'https://apps.bounceless.io/api/verifApiFile?secret='.$key.'&filename=emails.txt';
+$settings['file_contents'] = new CURLFile('/path/to/your/file.txt'); // path to your file
+$url = 'https://apps.bounceless.io/api/verifApiFile?secret='.$key.'&filename=my_emails.txt';
 
 $ch = curl_init($url);
-
-curl_setopt($ch, CURLOPT_POST, true);
-
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-curl_setopt($ch, CURLOPT_POSTFIELDS, $settings);
-
-$file_id = curl_exec($ch); //you need to save this FILE ID for get file status and download reports in future
-
+curl_setopt_array($ch, [
+    CURLOPT_POST => true,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POSTFIELDS => $settings,
+]);
+$file_id = curl_exec($ch);
 curl_close($ch);
 
-Example of output when success: 10700 Example of output when error happens :
+echo "File ID: " . $file_id . "\n";
+?>
+```
 
-. Status=" no_credit"- Your balance is $0.
+### Get API File Info Endpoint
 
-. Status=" cannot_upload_file"- File uploaded as broken.
-
-. Status=" key_not_valid"- No api key provided in request or invalid.
-
-. Status=" missing parameters"- There are no validations remaining to complete this attempt.
-
-
-# Get file info with API:
-
-There is link that you need to request:
-https://apps.bounceless.io/api/getApiFileInfo?secret=PUT_YOUR_API_KEY_HERE&id=FILE_ID_OF_ALREADY_UPLOADED_FILE
-
+php
+<?php
 $key = "PUT YOUR API KEY HERE";
+$file_id = "10700"; // ID of the uploaded file
 
-$url = 'https://apps.bounceless.io/api/getApiFileInfo?secret='.$key.'&id=10700';
-
+$url = 'https://apps.bounceless.io/api/getApiFileInfo?secret='.$key.'&id='.$file_id;
 $string = file_get_contents($url);
+list($file_id, $filename, $unique, $lines, $lines_processed, $status, $timestamp, $link1, $link2) = explode('|', $string);
 
-list($file_id,$filename,$unique,$lines,$lines_processed,$status,$timestamp,$link1,$link2) = explode('|',$string); //parse data
+echo "File ID: " . $file_id . "\n";
+echo "Filename: " . $filename . "\n";
+echo "Unique: " . $unique . "\n";
+echo "Lines: " . $lines . "\n";
+echo "Lines Processed: " . $lines_processed . "\n";
+echo "Status: " . $status . "\n";
+echo "Timestamp: " . $timestamp . "\n";
+echo "Link 1: " . $link1 . "\n";
+echo "Link 2: " . $link2 . "\n";
+?>
+```
 
+Please make sure to replace `"PUT YOUR API KEY HERE"` with your actual Bounceless API key before using this code.
 
-Example of output for file that in progress : 10700|my_emails.txt|no|200|150|progress|1445878121||
+## License
 
-Example of output for file that already finished :
-10700|my_emails.txt|no|200|200|finished|1445878121|https://apps.bounceless.io/app/webroot/files/52/655/result_ok_10700_2015-10-26.csv|https://apps.bounceless.io/app/webroot/files/52/655/result_all_10700_2015-10-26.csv
-
-
-Full errors list:
-
-. Status=" error_file_not_exists"- FILE ID is not exists on your account.
-
-. Status=" key_not_valid"- No api key provided in request or invalid.
-
-. Status=" missing parameters"- There are no validations remaining to complete this attempt.
-
-String with information:
-
-. {file_id}|{filename}|{unique}|{lines}|{lines_processed}|{status}|{timestamp}|{link_ok}|{link_all}
-
-. {file_id} - the same FILE ID as you use for request "file info"
-
-. {filename} - name of file (same as you use during file upload)
-. {unique} - "yes" or "no", remove duplicates option (same as you use during file upload)
-
-. {lines} - total number of parsed emails in file
-
-. {lines_processed} - number of already processed emails
-
-. {status} - file status, it can be: new, parsing, incorrect , waiting , progress , suspended, canceled, finished
-
-. {timestamp} - date-time when you upload file (in unix format)
-
-. {link_all} - link to report "all", if link is empty - file is not finished yet.
-
-. {link_ok} - link to report "ok", if link is empty - file is not finished yet.
-
+This project is licensed under the [MIT License](LICENSE).
