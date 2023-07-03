@@ -31,7 +31,7 @@ To verify a single email address, follow these steps:
 3. Execute the PHP script.
 4. The response from the API will be displayed, providing detailed information about the email address.
 
-### Verif API File Endpoint
+### Bulk API File Endpoint
 
 The `/verifApiFile` endpoint allows you to upload a file for email address verification.
 
