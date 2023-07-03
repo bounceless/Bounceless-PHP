@@ -20,7 +20,7 @@ To use this API, you'll need the following:
 
 ## Usage
 
-### Single Mail Details Endpoint
+### Single Verification Endpoint
 
 The `/singlemaildetails` endpoint allows you to verify the details of a single email address.
 
@@ -58,7 +58,7 @@ To retrieve file information, follow these steps:
 
 The code uses the cURL library to make HTTP requests to the Bounceless API. Here's a breakdown of the code for each endpoint:
 
-### Single Mail Details Endpoint
+### Single Verification Endpoint
 
 ```php
 <?php
