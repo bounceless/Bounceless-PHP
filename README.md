@@ -82,7 +82,7 @@ echo json_encode($data, JSON_PRETTY_PRINT);
 ?>
 ```
 
-### Verif API File Endpoint
+### Bulk API File Endpoint
 
 ```php
 <?php
