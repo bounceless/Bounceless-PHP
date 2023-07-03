@@ -1,7 +1,7 @@
 
 # Email Verification API for PHP
 
-This repository contains the code for Bounceless.io email verification API implemented in PHP. It uses the Bounceless API to verify the validity of email addresses.
+This repository contains the code for an email verification API implemented in PHP. It uses the Bounceless API to verify the validity of email addresses.
 
 ## Prerequisites
 
@@ -105,7 +105,7 @@ echo "File ID: " . $file_id . "\n";
 
 ### Get API File Info Endpoint
 
-php
+```php
 <?php
 $key = "PUT YOUR API KEY HERE";
 $file_id = "10700"; // ID of the uploaded file
@@ -131,3 +131,5 @@ Please make sure to replace `"PUT YOUR API KEY HERE"` with your actual Bounceles
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+```
+
