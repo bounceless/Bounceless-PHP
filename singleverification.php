@@ -51,7 +51,7 @@ The description for each parameter in the JSON response is as follows:
 
     success: Indicates if the email verification was successful. true for success, false otherwise.
     accept_all: Indicates if the email address is from an accept-all domain. true if it is an accept-all domain, false otherwise.
-    result: Indicates the result of the email verification. Possible values are: "valid" for a valid email address, "invalid" for an invalid email address, "unknown" for an unknown email address, risky for accept all email address
+    result: Indicates the result of the email verification. Possible values are: "valid" for a valid email address, "invalid" for an invalid email address, "unknown" for an unknown email address, risky for accept all email address.
     reason: Provides a reason for the email address verification result. This field may be null for valid email addresses or provide additional information for invalid email addresses.
     role: Indicates if the email address is a role-based email. true if it is a role-based email, false otherwise.
     free: Indicates if the email address is from a free email provider. true if it is a free email address, false otherwise.
