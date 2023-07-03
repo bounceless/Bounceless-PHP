@@ -1,5 +1,5 @@
 
-# Email Verification API for PHP
+# Bounceless.io Email Verification API for PHP
 
 This repository contains the code for an email verification API implemented in PHP. It uses the Bounceless API to verify the validity of email addresses.
 
